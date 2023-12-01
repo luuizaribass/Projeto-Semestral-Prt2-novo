@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagem Regressiva para o NATAL</title>
+
+  <style>
+
+@import url('https://i.pinimg.com/originals/ea/93/49/ea9349b630d5967ab131c54d87f0117d.jpg');
+
+    body {
+      background-image: url(2019_Merry_Christmas_4K_High_Quality_Desktop_1920x1200.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: 'Poppins', sans-serif;
+      margin: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #regressiva {
+      color: rgb(253, 0, 0);
+      font-weight: 600;
+      font-size: 55px;
+      margin-bottom: 20px;
+      text-shadow: 4px 4px 7px rgba(255, 255, 255, 0.674);
+    }
+    .tudo {
+      
+      border-radius: 25px;
+      padding: 30px;
+      width: fit-content;
+      margin-top: 250px;
+      text-align: center;
+      background-color: rgba(228, 228, 228, 0.751);
+    }
+    span {
+      font-weight: 780;
+      text-shadow: 4px 4px 7px rgba(208, 206, 206, 0.51);
+      color: rgb(186, 14, 14);
+      font-size: 40px;
+    }
+    h1 {
+      font-size: 35px;
+    }
+    #progress-bar {
+      margin-top: 20px;
+      width: 100%;
+      height: 20px;
+      background-color: #eee;
+      position: relative;
+      border-radius: 50px;
+    }
+    #progress {
+      height: 100%;
+      background-color: #4CAF50;
+      border-bottom-left-radius: 50px;
+      border-top-left-radius: 50px;
+    }
+
+  </style>
+  
+</head>
+<body>
+  <div class="tudo">
+    <h1>contagem regressiva para o <span>"merry christmas!!!"</span>🎄</h1>
+    <div id="regressiva"></div>
+    <div id="progress-bar">
+      <div id="progress"></div>
+    </div>
+  </div>
+  
+
+  <script>
+    // Função para calcular a diferença entre as datas
+    function getTimeRemaining(endtime) {
+            const total = Date.parse(endtime) - Date.parse(new Date());
+            const seconds = Math.floor((total / 1000) % 60);
+            const minutes = Math.floor((total / 1000 / 60) % 60);
+            const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(total / (1000 * 60 * 60 * 24));
+            
+            return {
+                total,
+                days,
+                hours,
+                minutes,
+                seconds
+            };
+        }
+
+        // Função para exibir a contagem regressiva
+        function initializeClock(endtime) {
+            const regressiva = document.getElementById('regressiva');
+            const progressBar = document.getElementById('progress');
+            const progressBarContainer = document.getElementById('progress-bar');
+
+            function updateClock() {
+                const t = getTimeRemaining(endtime);
+
+                regressiva.innerHTML = `${t.days}d ${t.hours}h ${t.minutes}m ${t.seconds}s`;
+
+                const totalTime = Date.parse(endtime) - Date.parse(dataDeInicioDoProgresso);
+                const elapsedTime = totalTime - t.total;
+                const percentage = (elapsedTime / totalTime) * 100;
+
+                progressBar.style.width = `${percentage}%`;
+
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                    progressBar.style.width = '100%';
+                }
+            }
+
+            updateClock(); // Chama a função uma vez para evitar atrasos na exibição
+
+            const timeinterval = setInterval(updateClock, 1000);
+        }
+
+        const dataDeInicioDoProgresso = new Date("Oct 1, " + new Date().getFullYear() + " 00:00:00 GMT");
+        // Define a data de término para o Natal deste ano
+        const deadline = new Date("December 25, " + new Date().getFullYear() + " 00:00:00 GMT");
+
+        // Inicia a contagem regressiva
+        initializeClock(deadline);
+  </script>
+</body>
+</html>
